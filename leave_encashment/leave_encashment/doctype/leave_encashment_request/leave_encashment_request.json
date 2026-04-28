@@ -1,0 +1,181 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "HR-LE-.YYYY.-.#####",
+ "creation": "2026-04-28 13:48:23.934372",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ovbn",
+  "employee",
+  "employee_name",
+  "designation",
+  "column_break_smkn",
+  "company",
+  "department",
+  "leave_details_section",
+  "posting_date",
+  "available_leave_balance",
+  "column_break_tquv",
+  "leave_type",
+  "requested_leaves",
+  "encashment_details_section",
+  "leave_salary_per_day",
+  "column_break_csmw",
+  "total_encashment_amount",
+  "section_break_qwzh",
+  "payroll_integration",
+  "column_break_hwvx",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ovbn",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee.employee",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name ",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_smkn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.company",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "leave_details_section",
+   "fieldtype": "Section Break",
+   "label": "Leave Details"
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "available_leave_balance",
+   "fieldtype": "Float",
+   "label": "Available Leave Balance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_tquv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "leave_type",
+   "fieldtype": "Link",
+   "label": "Leave Type",
+   "options": "Leave Type"
+  },
+  {
+   "fieldname": "requested_leaves",
+   "fieldtype": "Float",
+   "label": "Requested Leaves"
+  },
+  {
+   "fieldname": "encashment_details_section",
+   "fieldtype": "Section Break",
+   "label": "Encashment Details"
+  },
+  {
+   "fieldname": "leave_salary_per_day",
+   "fieldtype": "Float",
+   "label": "Leave Salary Per Day",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_csmw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_encashment_amount",
+   "fieldtype": "Float",
+   "label": "Total Encashment Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_qwzh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "payroll_integration",
+   "fieldtype": "Link",
+   "label": "Payroll Integration",
+   "options": "Payroll Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_hwvx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nPending Approval\nApproved\nRejected\nPaid",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-28 14:26:04.757676",
+ "modified_by": "Administrator",
+ "module": "Leave Encashment",
+ "name": "Leave Encashment Request",
+ "naming_rule": "Expression",
+ "owner": "salu@abc.com",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
