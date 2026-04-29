@@ -137,24 +137,33 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
+doc_events = {
+     "User": {
+        "before_save": "leave_encashment.leave_encashment.user_permission.adjust_user_permissions"
+    },
+    "Salary Slip": {
+        "on_submit": "leave_encashment.leave_encashment.doctype.leave_encashment_request.leave_encashment_request.set_payroll_reference"
+    },
+    "Leave Encashment Request": {
+        "on_update": "leave_encashment.leave_encashment.notification.send_notification"
+    }
 # 	"*": {
 # 		"on_update": "method",
 # 		"on_cancel": "method",
 # 		"on_trash": "method"
 # 	}
-# }
+}
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
 # 	"all": [
 # 		"leave_encashment.tasks.all"
 # 	],
-# 	"daily": [
-# 		"leave_encashment.tasks.daily"
-# 	],
+ 	"daily": [
+ 		"leave_encashment.leave_encashment.notification.pending_approval_reminder"
+ 	],
 # 	"hourly": [
 # 		"leave_encashment.tasks.hourly"
 # 	],
@@ -164,7 +173,7 @@ app_license = "mit"
 # 	"monthly": [
 # 		"leave_encashment.tasks.monthly"
 # 	],
-# }
+ }
 
 # Testing
 # -------
