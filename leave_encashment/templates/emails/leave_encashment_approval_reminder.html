@@ -1,0 +1,24 @@
+<p>{{ message }}</p>
+<table border="1" style="border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Leave Type</th>
+            <th>Encashed Leaves</th>
+            <th>Total Encashment Amount</th>
+            <th>Posting Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for approval in pending_approvals %}
+    <tr>
+        <td>{{ approval.employee_name }}</td>
+        <td>{{ approval.leave_type }}</td>
+        <td>{{ approval.requested_leaves }}</td>
+        <td>{{ approval.total_encashment_amount }}</td>
+        <td>{{ approval.posting_date }}</td>
+        <td><a href="{{ approval.url }}">View</a></td>
+    </tr>
+{% endfor %}
+</table>

@@ -5,8 +5,34 @@ frappe.ui.form.on("Leave Encashment Request", {
 	refresh(frm) {
           // leave type filter
         frm.trigger("filter_leave_type");
+        // preview button to show print format
+        frm.trigger("preview_print_format");
 
 	},
+
+preview_print_format: function(frm) {
+    if (!frm.is_new()) {
+        frm.add_custom_button(__("Preview"), function() {
+            frappe.call({
+                method: "leave_encashment.leave_encashment.doctype.leave_encashment_request.leave_encashment_request.generate_preview",
+                args: {
+                    doctype: frm.doctype,
+                    docname: frm.docname,
+                },
+                freeze: true,
+                callback: (r) => {
+                    const newWindow = window.open('', '_blank');
+                    newWindow.document.write(r.message);
+                    newWindow.document.close();
+                },
+                error: (r) => {
+                    frappe.msgprint(r);
+                },
+            });
+        });
+    }
+},
+
 
 // Fetch salary details for calculation 
 employee:function(frm){
@@ -14,6 +40,8 @@ employee:function(frm){
         // leave type filter
         frm.trigger("filter_leave_type");
         frm.trigger("get_employee_salary_details");
+        frm.trigger("get_employee_leave_details");
+       frm.trigger("calculate_encashment_amount");
 
     }
 },
@@ -45,23 +73,55 @@ get_employee_salary_details: function(frm) {
         });
 },  
 
+posting_date: function(frm) {
+    frm.trigger("get_employee_leave_details")
+},
+
 leave_type: function(frm) {
-    
-    if (frm.doc.leave_type) {
+
+    frm.trigger("get_employee_leave_details")
       
-    //  Fetch employee leave balance based on selected Leave Type 
-    frappe.call({
-        method: "leave_encashment.leave_encashment.doctype.leave_encashment_request.leave_encashment_request.get_employee_leave_balance",
-        args: {
-            employee: frm.doc.employee,
-            leave_type: frm.doc.leave_type
-        },
-        callback: function(r) {
-            if (r.message) {
-                frm.set_value("available_leave_balance", r.message);
-            }
-        }
-    });
+},
+requested_leaves: function(frm) {
+
+    if (frm.doc.requested_leaves > frm.doc.available_encashable_leaves) {
+        frappe.throw({
+            title: "Invalid Request",
+            message: __("Requested Leaves cannot exceed Available Encashable Leaves."),
+        });
+        frm.set_value("requested_leaves",0);
     }
-}
+    frm.trigger("calculate_encashment_amount")
+},
+
+
+get_employee_leave_details: function(frm) {
+    
+    if (frm.doc.employee && frm.doc.leave_type && frm.doc.posting_date) {
+        frappe.call({
+            method: "get_employee_leave_details",
+            doc: frm.doc,
+            callback: function(r) {
+                if (r.message) {
+                    frm.refresh_fields();
+                }
+            }
+        });
+    }
+},
+
+calculate_encashment_amount: function(frm) {
+    if (frm.doc.requested_leaves && frm.doc.leave_salary_per_day) {
+        frappe.call({
+            method: "calculate_encashment_amount",
+            doc:frm.doc,
+            callback: function(r) {
+                if (r.message) {
+                    frm.refresh_field("total_encashment_amount");
+                }
+            }
+        });
+    }
+},
+
 });

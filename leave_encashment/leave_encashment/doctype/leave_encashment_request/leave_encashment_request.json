@@ -6,42 +6,51 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "section_break_ovbn",
+  "employee_details_section",
+  "employee_details_column",
   "employee",
-  "employee_name",
-  "designation",
-  "column_break_smkn",
+  "column_break_qhsb",
   "company",
+  "section_break_ovbn",
+  "employee_name",
+  "column_break_smkn",
   "department",
+  "column_break_1",
+  "designation",
   "leave_details_section",
   "posting_date",
   "available_leave_balance",
+  "available_encashable_leaves",
   "column_break_tquv",
   "leave_type",
+  "actual_encashable_days",
   "requested_leaves",
   "encashment_details_section",
   "leave_salary_per_day",
   "column_break_csmw",
   "total_encashment_amount",
   "section_break_qwzh",
-  "payroll_integration",
+  "status",
+  "additional_salary_reference",
   "column_break_hwvx",
-  "status"
+  "leave_allocation",
+  "payroll_entry_reference"
  ],
  "fields": [
   {
    "fieldname": "section_break_ovbn",
-   "fieldtype": "Section Break",
-   "label": "Employee Details"
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "employee",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Employee",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
-   "fetch_from": "employee.employee",
+   "fetch_from": "employee.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
    "label": "Employee Name ",
@@ -76,14 +85,35 @@
    "read_only": 1
   },
   {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "leave_allocation",
+   "fieldtype": "Link",
+   "label": "Leave Allocation",
+   "options": "Leave Allocation",
+   "read_only": 1
+  },
+  {
    "fieldname": "leave_details_section",
    "fieldtype": "Section Break",
-   "label": "Leave Details"
+   "label": "Leave Information"
   },
   {
    "fieldname": "posting_date",
    "fieldtype": "Date",
-   "label": "Posting Date"
+   "in_list_view": 1,
+   "label": "Posting Date",
+   "reqd": 1
   },
   {
    "fieldname": "available_leave_balance",
@@ -98,18 +128,35 @@
   {
    "fieldname": "leave_type",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Leave Type",
-   "options": "Leave Type"
+   "options": "Leave Type",
+   "reqd": 1
   },
   {
+   "depends_on": "eval:doc.available_encashable_leaves > 0",
    "fieldname": "requested_leaves",
    "fieldtype": "Float",
-   "label": "Requested Leaves"
+   "label": "Requested Leaves",
+   "non_negative": 1
+  },
+  {
+   "fetch_from": "leave_type.max_encashable_leaves",
+   "fieldname": "actual_encashable_days",
+   "fieldtype": "Float",
+   "label": "Actual Encashable Days",
+   "read_only": 1
+  },
+  {
+   "fieldname": "available_encashable_leaves",
+   "fieldtype": "Float",
+   "label": "Available Encashable Leaves",
+   "read_only": 1
   },
   {
    "fieldname": "encashment_details_section",
    "fieldtype": "Section Break",
-   "label": "Encashment Details"
+   "label": "Encashment Calculation"
   },
   {
    "fieldname": "leave_salary_per_day",
@@ -129,18 +176,8 @@
   },
   {
    "fieldname": "section_break_qwzh",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "payroll_integration",
-   "fieldtype": "Link",
-   "label": "Payroll Integration",
-   "options": "Payroll Entry",
-   "read_only": 1
-  },
-  {
-   "fieldname": "column_break_hwvx",
-   "fieldtype": "Column Break"
+   "fieldtype": "Section Break",
+   "label": "Status & References"
   },
   {
    "fieldname": "status",
@@ -148,12 +185,43 @@
    "label": "Status",
    "options": "Draft\nPending Approval\nApproved\nRejected\nPaid",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_hwvx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "additional_salary_reference",
+   "fieldtype": "Link",
+   "label": "Additional Salary Reference",
+   "options": "Additional Salary",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payroll_entry_reference",
+   "fieldtype": "Link",
+   "label": "Payroll Entry Reference",
+   "options": "Payroll Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "employee_details_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_qhsb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-04-28 14:26:04.757676",
+ "modified": "2026-04-30 01:14:12.325495",
  "modified_by": "Administrator",
  "module": "Leave Encashment",
  "name": "Leave Encashment Request",
