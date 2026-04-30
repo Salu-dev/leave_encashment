@@ -1,34 +1,19 @@
 {
-<<<<<<< HEAD
- "based_on": "",
- "chart_name": "Monthly Leave Encashment Amount",
- "chart_type": "Custom",
- "creation": "2026-04-28 18:26:40.839515",
- "currency": "INR",
- "docstatus": 0,
- "doctype": "Dashboard Chart",
- "document_type": "",
-=======
  "based_on": "posting_date",
  "chart_name": "Monthly Leave Encashment Amount",
  "chart_type": "Sum",
- "creation": "2026-04-30 07:45:13.336085",
+ "creation": "2026-04-30 12:18:27.751270",
  "currency": "INR",
  "docstatus": 0,
  "doctype": "Dashboard Chart",
  "document_type": "Leave Encashment Request",
->>>>>>> f2dec34 (feat: add dashboard chart for monthly leave encashment amount with fixtures)
  "dynamic_filters_json": "[]",
  "filters_json": "[]",
  "group_by_type": "Count",
  "idx": 0,
  "is_public": 1,
  "is_standard": 1,
-<<<<<<< HEAD
- "modified": "2026-04-28 18:26:40.839515",
-=======
- "modified": "2026-04-30 07:45:13.336085",
->>>>>>> f2dec34 (feat: add dashboard chart for monthly leave encashment amount with fixtures)
+ "modified": "2026-04-30 12:18:27.751270",
  "modified_by": "Administrator",
  "module": "Leave Encashment",
  "name": "Monthly Leave Encashment Amount",
@@ -37,21 +22,12 @@
  "parent_document_type": "",
  "roles": [],
  "show_values_over_chart": 0,
-<<<<<<< HEAD
- "source": "Monthly Leave Encashment Amount",
- "time_interval": "Yearly",
-=======
  "source": "",
  "time_interval": "Monthly",
->>>>>>> f2dec34 (feat: add dashboard chart for monthly leave encashment amount with fixtures)
  "timeseries": 1,
  "timespan": "Last Year",
  "type": "Bar",
  "use_report_chart": 0,
-<<<<<<< HEAD
- "value_based_on": "",
-=======
  "value_based_on": "total_encashment_amount",
->>>>>>> f2dec34 (feat: add dashboard chart for monthly leave encashment amount with fixtures)
  "y_axis": []
 }
