@@ -79,11 +79,8 @@ class LeaveEncashmentRequest(Document):
 			+ self.requested_leaves,
 		)
 	def create_additional_salary(self):
-
-
 		# Create Additional Salary record
 		additional_salary = frappe.new_doc("Additional Salary")
-		additional_salary.company =self.company
 		additional_salary.company =self.company
 		additional_salary.employee = self.employee
 		additional_salary.currency = self.currency
