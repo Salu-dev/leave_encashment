@@ -5,7 +5,7 @@
    "label": "Monthly Leave Encashment Amount"
   }
  ],
- "content": "[{\"id\":\"R7KWzpPdxg\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Leave Encashments</span>\",\"col\":12}},{\"id\":\"g4skNIbnc6\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"PzVn7ENZNx\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Monthly Leave Encashment Amount\",\"col\":12}},{\"id\":\"-KuqkNxdCe\",\"type\":\"card\",\"data\":{\"card_name\":\"Leave\",\"col\":4}},{\"id\":\"1UhSUaxPmO\",\"type\":\"card\",\"data\":{\"card_name\":\"Payroll\",\"col\":4}}]",
+ "content": "[{\"id\":\"R7KWzpPdxg\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Leave Encashments</span>\",\"col\":12}},{\"id\":\"g4skNIbnc6\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"PzVn7ENZNx\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Monthly Leave Encashment Amount\",\"col\":12}},{\"id\":\"-KuqkNxdCe\",\"type\":\"card\",\"data\":{\"card_name\":\"Leave\",\"col\":4}},{\"id\":\"1UhSUaxPmO\",\"type\":\"card\",\"data\":{\"card_name\":\"Payroll\",\"col\":4}},{\"id\":\"Uy1DbWULaR\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"9H1nx9GD02\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Leave Encashment Summary\",\"col\":3}}]",
  "creation": "2026-04-28 18:29:37.893960",
  "custom_blocks": [],
  "docstatus": 0,
@@ -18,45 +18,6 @@
  "is_hidden": 0,
  "label": "Leave Encashments",
  "links": [
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Leave",
-   "link_count": 3,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Leave Type",
-   "link_count": 0,
-   "link_to": "Leave Type",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Leave Allocation",
-   "link_count": 0,
-   "link_to": "Leave Allocation",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Leave Encashment Request",
-   "link_count": 0,
-   "link_to": "Leave Encashment Request",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
   {
    "hidden": 0,
    "is_query_report": 0,
@@ -115,9 +76,58 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Leave",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Holiday List",
+   "link_count": 0,
+   "link_to": "Holiday List",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Leave Type",
+   "link_count": 0,
+   "link_to": "Leave Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Leave Allocation",
+   "link_count": 0,
+   "link_to": "Leave Allocation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Leave Encashment Request",
+   "link_count": 0,
+   "link_to": "Leave Encashment Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-04-30 12:18:52.148015",
+ "modified": "2026-04-30 15:10:49.862932",
  "modified_by": "Administrator",
  "module": "Leave Encashment",
  "name": "Leave Encashments",
@@ -138,6 +148,15 @@
   }
  ],
  "sequence_id": 39.0,
- "shortcuts": [],
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Leave Encashment Summary",
+   "link_to": "Leave Encashment Summary",
+   "report_ref_doctype": "Leave Encashment Request",
+   "type": "Report"
+  }
+ ],
  "title": "Leave Encashments"
 }
