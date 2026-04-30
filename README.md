@@ -62,8 +62,6 @@ A comprehensive Frappe/ERPNext custom application for managing leave encashment 
 - **HR Manager**: Can approve/reject requests (Pending Approval → Approved/Rejected)
 - **Accounts User**: Can process payroll integration (Approved → Paid)
 
-- <img width="829" height="801" alt="image" src="https://github.com/user-attachments/assets/7b603706-f31b-4f5c-b122-80109972cd36" />
-
 
 ### 4. Payroll Integration
 
