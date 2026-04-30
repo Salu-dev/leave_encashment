@@ -213,26 +213,36 @@ curl -X POST http://your-site/api/method/leave_encashment.api.create_leave_encas
 
 ### Installation Steps
 
-1. **Clone the repository:**
+## Installation Steps
+
+1. Clone the repository:
+
 ```bash
 cd $PATH_TO_YOUR_BENCH
 bench get-app https://github.com/your-username/leave_encashment
 ```
 
-2. **Install the app:**
+2. Install the app on your site:
+
 ```bash
-bench install-app leave_encashment
+bench --site your-site-name install-app leave_encashment
 ```
 
-3. **Build assets:**
+3. Run database migrations:
+
 ```bash
-bench build
+bench --site your-site-name migrate
+```
+4. start the bench:
+
+```bash
+bench start
 ```
 
-4. **Restart bench:**
-```bash
-bench restart
-```
+## Configuration
+
+After installation, configure the required settings for your environment and assign the appropriate roles and permissions.
+
 
 ## Configuration
 
