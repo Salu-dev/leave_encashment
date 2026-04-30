@@ -37,14 +37,10 @@ class LeaveEncashmentRequest(Document):
 		if old_doc and (old_doc.status != "Approved" and self.status == "Approved"):
 			# Automatically create an Additional Salary record and update leave allocation
 			self.update_leave_allocation()
-			# Automatically create an Additional Salary record and update leave allocation
-			self.update_leave_allocation()
 			self.create_additional_salary()
 
 	@frappe.whitelist()
-	def calculate_encashment_amount(self):	
-		if self.requested_leaves == 0 or not self.leave_salary_per_day:
-			frappe.throw("Requested leaves and leave salary per day are required to calculate encashment amount")
+	def calculate_encashment_amount(self):
 		if self.requested_leaves == 0 or not self.leave_salary_per_day:
 			frappe.throw("Requested leaves and leave salary per day are required to calculate encashment amount")
 		if self.requested_leaves and self.leave_salary_per_day:
