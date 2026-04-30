@@ -25,7 +25,8 @@ A comprehensive Frappe/ERPNext custom application for managing leave encashment 
 - Payroll Entry Reference (Read Only)
 - Status (Draft, Pending Approval, Approved, Rejected, Paid)
 
-- <img width="1486" height="911" alt="image" src="https://github.com/user-attachments/assets/6ff5eafa-35f1-4412-b6a5-f47457558a44" />
+  
+<img width="1187" height="823" alt="image" src="https://github.com/user-attachments/assets/7f8a96f9-1a14-4d59-924e-accf8f25d89f" />
 
 
 ### 2. Business Logic Implementation
@@ -108,7 +109,7 @@ A comprehensive Frappe/ERPNext custom application for managing leave encashment 
 - Salary Per Day
 - Total Encashment Amount
 - Status
-- Payroll Entry Reference
+
 
 ### 7. Dashboard Chart
 
@@ -163,7 +164,7 @@ curl -X POST http://your-site/api/method/leave_encashment.api.create_leave_encas
 
 **Role-Based Access:**
 - **System Manager**: Full access (Create, Read, Write, Delete, Submit, Cancel, Email, Export, Print, Report, Share)
-- **Employee**: Create, Read, Write (own requests), Email, Print
+- **Employee**: Create, Read, Write (own requests), Email, Print,Report
 - **HR Manager**: Read, Write, Submit, Email, Export, Print, Report
 - **Accounts User**: Read, Write, Email, Export, Print, Report
 
@@ -343,44 +344,6 @@ else:
     print(f"Error: {result['message']}")
 ```
 
-### JavaScript Example
-
-```javascript
-frappe.call({
-    method: "leave_encashment.api.create_leave_encashment_request",
-    args: {
-        employee: "EMP-001",
-        posting_date: "2026-04-30",
-        leave_type: "Annual Leave",
-        requested_leaves: 5
-    },
-    callback: function(r) {
-        if(r.message.status === "success") {
-            frappe.msgprint("Request created: " + r.message.doc.name);
-        } else {
-            frappe.msgprint("Error: " + r.message.message);
-        }
-    }
-});
-```
-
-## Troubleshooting
-
-### Issue: Leave Type not showing in dropdown
-**Solution:** Ensure Leave Type has "Allow Encashment" checked and employee has a valid Leave Allocation for that type.
-
-### Issue: Salary Per Day not calculating
-**Solution:** Ensure Salary Structure Assignment exists for the employee with Leave Encashment Amount Per Day configured, or Salary Structure has the field set.
-
-### Issue: Additional Salary not created on approval
-**Solution:** Check that Leave Type has an Earning Component configured. Check error logs for detailed error messages.
-
-### Issue: Payroll Entry Reference not updating
-**Solution:** Ensure the Additional Salary is included in Salary Slip earnings with salary component "Leave Encashment". The hook will automatically update the reference.
-
-### Issue: Email notifications not sending
-**Solution:** Verify email settings in Frappe, ensure email templates exist, and check that users have valid email addresses.
-
 ## Development
 
 ### Code Structure
@@ -403,51 +366,3 @@ leave_encashment/
 │   ├── notification.py                         # Email notifications
 │   └── hooks.py                                 # App hooks
 ```
-
-### Contributing
-
-This app uses `pre-commit` for code formatting and linting. Please install pre-commit and enable it for this repository:
-
-```bash
-cd apps/leave_encashment
-pre-commit install
-```
-
-Pre-commit is configured to use the following tools:
-- ruff (Python linting and formatting)
-- eslint (JavaScript linting)
-- prettier (JavaScript formatting)
-- pyupgrade (Python syntax upgrading)
-
-### Running Tests
-
-```bash
-cd apps/leave_encashment
-bench --site your-site run-tests --app leave_encashment
-```
-
-## License
-
-MIT License - See license.txt for details
-
-## Support
-
-For issues, questions, or contributions:
-- Email: salubaiju2803@gmail.com
-- Publisher: Salumol Baiju
-
-## Changelog
-
-### Version 1.0.0 (2026-04-30)
-- Initial release
-- Custom DocType: Leave Encashment Request
-- Business logic for encashment calculations
-- Workflow configuration
-- Payroll integration
-- Client-side validations
-- Leave Encashment Summary report
-- Monthly Leave Encashment Amount dashboard chart
-- API for programmatic request creation
-- Email notifications
-- Custom print format
-- Automated approval reminders
