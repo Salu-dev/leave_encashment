@@ -25,6 +25,9 @@ A comprehensive Frappe/ERPNext custom application for managing leave encashment 
 - Payroll Entry Reference (Read Only)
 - Status (Draft, Pending Approval, Approved, Rejected, Paid)
 
+- <img width="1486" height="911" alt="image" src="https://github.com/user-attachments/assets/6ff5eafa-35f1-4412-b6a5-f47457558a44" />
+
+
 ### 2. Business Logic Implementation
 
 **Automated Calculations:**
