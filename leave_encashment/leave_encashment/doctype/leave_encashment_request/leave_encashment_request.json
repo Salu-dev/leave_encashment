@@ -90,14 +90,7 @@
    "fieldname": "column_break_1",
    "fieldtype": "Column Break"
   },
-  {
-   "fetch_from": "employee.designation",
-   "fieldname": "designation",
-   "fieldtype": "Link",
-   "label": "Designation",
-   "options": "Designation",
-   "read_only": 1
-  },
+  
   {
    "fieldname": "leave_allocation",
    "fieldtype": "Link",

@@ -159,12 +159,15 @@ class LeaveEncashmentRequest(Document):
 		if (self.employee and self.posting_date):
 			assigned_salary_structure = get_assigned_salary_structure(self.employee, self.posting_date)
 			leave_encashment_amount_per_day = frappe.db.get_value("Salary Structure Assignment", 
-			{"name": assigned_salary_structure, "docstatus": 1, "from_date": ["<=", self.posting_date]}, "leave_encashment_amount_per_day","currency")
-			if not leave_encashment_amount_per_day:
+			{"salary_structure": assigned_salary_structure, "docstatus": 1, "from_date": ["<=", self.posting_date]}, 
+			["leave_encashment_amount_per_day","currency"])
+			self.leave_salary_per_day = leave_encashment_amount_per_day[0]
+			self.currency = leave_encashment_amount_per_day[1]
+			if not leave_encashment_amount_per_day or leave_encashment_amount_per_day[0] <= 0:
 				leave_encashment_amount_per_day = frappe.db.get_value("Salary Structure", 
 				{"name": assigned_salary_structure}, ["leave_encashment_amount_per_day","currency"])
-				if not leave_encashment_amount_per_day:
-					frappe.throw("Leave Encashment Amount Per Day not found in Salary Structure")
+				if not leave_encashment_amount_per_day or leave_encashment_amount_per_day[0] <= 0:
+					frappe.throw("Leave Encashment Amount Per Day not found in Salary Structure please set Salary structure and Salary Structure Assignment")
 				else:
 					self.leave_salary_per_day = leave_encashment_amount_per_day[0]
 					self.currency = leave_encashment_amount_per_day[1]
@@ -216,6 +219,7 @@ def set_payroll_reference(doc, method):
 					if leave_encashment:
 						frappe.db.set_value("Leave Encashment Request", leave_encashment, "payroll_entry_reference", doc.payroll_entry)
 						frappe.db.set_value("Leave Encashment Request", leave_encashment, "workflow_state", "Paid")
+						frappe.db.set_value("Leave Encashment Request", leave_encashment, "status", "Paid")
 						break
 	except Exception as e:
 		frappe.log_error(f"Error in set_payroll_reference: {str(e)}")
