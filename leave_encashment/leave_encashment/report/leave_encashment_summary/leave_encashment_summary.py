@@ -99,13 +99,6 @@ def get_columns():
 			"label": "Status",
 			"fieldtype": "Select",
 			"width": 100
-		},
-		{
-			"fieldname": "payroll_entry_reference",
-			"label": "Payroll Entry",
-			"fieldtype": "Link",
-			"options": "Payroll Entry",
-			"width": 120
 		}
 	]
 
@@ -130,7 +123,9 @@ def get_data(filters):
 	if filters.to_date:
 		encashment_filter.append(["posting_date", "<=", filters.to_date])
 
-	data = frappe.get_list("Leave Encashment Request", filters=encashment_filter, fields=["*"],
+	data = frappe.get_list("Leave Encashment Request", filters=encashment_filter, 
+	fields=["name", "employee", "employee_name", "company", "department", "designation", "leave_type", "posting_date", "available_leave_balance", "requested_leaves", "available_encashable_leaves", "leave_salary_per_day", "total_encashment_amount", "status"],
 		order_by="employee,posting_date")
+
 
 	return data

@@ -8,57 +8,71 @@
  "doctype": "Report",
  "filters": [
   {
+   "default": "",
    "fieldname": "company",
    "fieldtype": "Link",
    "label": "Company",
+   "mandatory": 0,
    "options": "Company",
-   "default": ""
+   "wildcard_filter": 0
   },
   {
+   "default": "",
    "fieldname": "department",
    "fieldtype": "Link",
    "label": "Department",
+   "mandatory": 0,
    "options": "Department",
-   "default": ""
+   "wildcard_filter": 0
   },
   {
+   "default": "",
    "fieldname": "employee",
    "fieldtype": "Link",
    "label": "Employee",
+   "mandatory": 0,
    "options": "Employee",
-   "default": ""
+   "wildcard_filter": 0
   },
   {
+   "default": "",
    "fieldname": "leave_type",
    "fieldtype": "Link",
    "label": "Leave Type",
+   "mandatory": 0,
    "options": "Leave Type",
-   "default": ""
+   "wildcard_filter": 0
   },
   {
+   "default": "",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
+   "mandatory": 0,
    "options": "Draft\nPending Approval\nApproved\nRejected\nPaid",
-   "default": ""
+   "wildcard_filter": 0
   },
   {
+   "default": "",
    "fieldname": "from_date",
    "fieldtype": "Date",
    "label": "From Date",
-   "default": ""
+   "mandatory": 0,
+   "wildcard_filter": 0
   },
   {
+   "default": "",
    "fieldname": "to_date",
    "fieldtype": "Date",
    "label": "To Date",
-   "default": ""
+   "mandatory": 0,
+   "wildcard_filter": 0
   }
  ],
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": null,
- "modified": "2026-04-28 17:32:43.370977",
+ "modified": "2026-04-30 15:16:10.641442",
  "modified_by": "Administrator",
  "module": "Leave Encashment",
  "name": "Leave Encashment Summary",
@@ -70,6 +84,9 @@
  "roles": [
   {
    "role": "System Manager"
+  },
+  {
+   "role": "Employee"
   }
  ],
  "timeout": 0
