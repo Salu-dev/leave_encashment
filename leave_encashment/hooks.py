@@ -260,5 +260,11 @@ fixtures = [{
     "filters": {
         "name": "Monthly Leave Encashment Amount"
     }
+},
+{
+    "doctype": "Print Format",
+    "filters": {
+        "name": "Leave Encashment Request"
+    }
 }]
 
