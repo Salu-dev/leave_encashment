@@ -224,26 +224,70 @@ class TestLeaveEncashmentRequest(FrappeTestCase):
 		pass
 
 	def test_full_workflow_integration(self):
-		"""Test complete workflow from creation to approval - skip due to HRMS dependencies"""
-		# This test requires complex setup (Leave Type, Additional Salary, etc.)
-		# Skip for now
-		pass
+		"""Test complete workflow from creation to approval"""
+		# Mock the earning component in leave type
+		frappe.db.set_value("Leave Type", self.leave_type, "earning_component", self.salary_component)
+		
+		# Create and save request
+		doc = self.create_test_encashment_request()
+		doc.status = "Draft"
+		doc.flags.ignore_validate = True
+		doc.insert()
+		
+		# Verify initial state
+		self.assertEqual(doc.status, "Draft")
+		self.assertIsNone(doc.additional_salary_reference)
+		
+		# Submit to change status
+		doc.status = "Pending Approval"
+		doc.flags.ignore_validate = True
+		doc.save()
+		
+		# Verify pending state
+		self.assertEqual(doc.status, "Pending Approval")
+		
+		# Approve the request
+		doc.status = "Approved"
+		doc.flags.ignore_validate = True
+		doc.save()
+		
+		# Verify Additional Salary was created
+		self.assertIsNotNone(doc.additional_salary_reference)
+		
+		additional_salary = frappe.get_doc("Additional Salary", doc.additional_salary_reference)
+		self.assertEqual(additional_salary.employee, self.employee)
+		self.assertEqual(additional_salary.amount, doc.total_encashment_amount)
 
 	def test_get_encashable_leave_types(self):
 		"""Test filtering encashable leave types"""
-		# This test requires actual leave allocation data
-		# Skip for now - just verify the method exists
+		# This test requires actual leave allocation data, so we'll skip it
+		# or mock it more comprehensively. For now, we'll just verify the method exists
 		from leave_encashment.leave_encashment.doctype.leave_encashment_request.leave_encashment_request import get_encashable_leave_types
 		self.assertTrue(callable(get_encashable_leave_types))
 
 	def test_before_save_calculation(self):
-		"""Test that calculation happens on before_save - skip due to validation dependencies"""
-		# This test requires document save which triggers validation
-		# Skip for now - calculation is tested in test_calculate_encashment_amount
-		pass
+		"""Test that calculation happens on before_save"""
+		doc = self.create_test_encashment_request()
+		doc.leave_salary_per_day = 1000
+		doc.requested_leaves = 5
+		doc.flags.ignore_validate = True
+		doc.insert()
+		
+		self.assertEqual(doc.total_encashment_amount, 5000)
 
 	def test_on_update_approval_trigger(self):
-		"""Test that Additional Salary is created on approval - skip due to HRMS dependencies"""
-		# This test requires Additional Salary creation
-		# Skip for now
-		pass
+		"""Test that Additional Salary is created on approval"""
+		# Mock the earning component in leave type
+		frappe.db.set_value("Leave Type", self.leave_type, "earning_component", self.salary_component)
+		
+		doc = self.create_test_encashment_request()
+		doc.status = "Draft"
+		doc.flags.ignore_validate = True
+		doc.insert()
+		
+		# Simulate approval
+		doc.status = "Approved"
+		doc.flags.ignore_validate = True
+		doc.save()
+		
+		self.assertIsNotNone(doc.additional_salary_reference)
