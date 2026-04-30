@@ -11,6 +11,11 @@
   "employee",
   "column_break_qhsb",
   "company",
+  "employee_details_section",
+  "employee_details_column",
+  "employee",
+  "column_break_qhsb",
+  "company",
   "section_break_ovbn",
   "employee_name",
   "column_break_smkn",
@@ -26,8 +31,10 @@
   "actual_encashable_days",
   "requested_leaves",
   "encashment_details_section",
-  "leave_salary_per_day",
+  "currency",
   "column_break_csmw",
+  "leave_salary_per_day",
+  "column_break_kbxa",
   "total_encashment_amount",
   "section_break_qwzh",
   "status",
@@ -160,8 +167,9 @@
   },
   {
    "fieldname": "leave_salary_per_day",
-   "fieldtype": "Float",
+   "fieldtype": "Currency",
    "label": "Leave Salary Per Day",
+   "options": "currency",
    "read_only": 1
   },
   {
@@ -170,8 +178,9 @@
   },
   {
    "fieldname": "total_encashment_amount",
-   "fieldtype": "Float",
+   "fieldtype": "Currency",
    "label": "Total Encashment Amount",
+   "options": "currency",
    "read_only": 1
   },
   {
@@ -203,25 +212,12 @@
    "label": "Payroll Entry Reference",
    "options": "Payroll Entry",
    "read_only": 1
-  },
-  {
-   "fieldname": "employee_details_column",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_qhsb",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "employee_details_section",
-   "fieldtype": "Section Break",
-   "label": "Employee Details"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-04-30 01:14:12.325495",
+ "modified": "2026-04-28 14:26:04.757676",
  "modified_by": "Administrator",
  "module": "Leave Encashment",
  "name": "Leave Encashment Request",
