@@ -34,8 +34,6 @@ class LeaveEncashmentRequest(Document):
 
 	def on_update(self):
 		old_doc = self.get_doc_before_save()
-	def on_update(self):
-		old_doc = self.get_doc_before_save()
 		if old_doc and (old_doc.status != "Approved" and self.status == "Approved"):
 			# Automatically create an Additional Salary record and update leave allocation
 			self.update_leave_allocation()
@@ -43,7 +41,6 @@ class LeaveEncashmentRequest(Document):
 			self.update_leave_allocation()
 			self.create_additional_salary()
 
-	@frappe.whitelist()
 	@frappe.whitelist()
 	def calculate_encashment_amount(self):	
 		if self.requested_leaves == 0 or not self.leave_salary_per_day:
@@ -140,7 +137,11 @@ class LeaveEncashmentRequest(Document):
 
 		leave_balance = get_leave_balance_on(self.employee, self.leave_type, self.posting_date)
 		self.available_leave_balance = leave_balance
+		# Get valid encashable days based on leave type configuration
+		max_encashable_days = frappe.db.get_value("Leave Type", self.leave_type, "max_encashable_leaves") or 0
+		self.actual_encashable_days = max_encashable_days
 
+	
 	def get_available_encashable_leave_balance(self):
 		# Get available encashable leave balance
 		encashed_leaves = frappe.db.get_value("Leave Allocation", {"name": self.leave_allocation}, "total_leaves_encashed") or 0
@@ -169,19 +170,7 @@ class LeaveEncashmentRequest(Document):
 					self.currency = leave_encashment_amount_per_day[1]
 					
 
-@frappe.whitelist()
-def get_encashable_leave_types(doctype, txt, searchfield, start, page_len, filters):
-	employee=filters.get("employee")
-	if not employee:
-		return []
-	return  frappe.db.sql(""" SELECT DISTINCT lt.name 
-		FROM `tabLeave Type` lt
-		JOIN `tabLeave Allocation` la ON lt.name = la.leave_type
-		WHERE lt.allow_encashment = 1
-		AND la.employee = %(employee)s
-		AND la.total_leaves_allocated > 0
-		""", {"employee": employee})
-	
+@frappe.whitelist()	
 # set payroll reference for leave encashment request
 def get_encashable_leave_types(doctype, txt, searchfield, start, page_len, filters):
 	employee=filters.get("employee")
