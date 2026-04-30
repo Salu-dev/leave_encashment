@@ -83,7 +83,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "leave_encashment.install.before_install"
-# after_install = "leave_encashment.setup.after_install"
+after_install = "leave_encashment.setup.after_install"
 
 # Uninstallation
 # ------------
@@ -138,10 +138,7 @@ app_license = "mit"
 # Hook on document methods and events
 
 doc_events = {
-    "user":{
-        "on_update": "leave_encashment.leave_encashment.user_permission.update_user_permissions"
-    },
-    
+      
     "Salary Slip": {
         "on_submit": "leave_encashment.leave_encashment.doctype.leave_encashment_request.leave_encashment_request.set_payroll_reference"
     },
@@ -257,19 +254,23 @@ scheduler_events = {
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 fixtures = [
-#     {
-#     "doctype": "Dashboard Chart",
-#     "filters": {
-#         "name": "Monthly Leave Encashment Amount"
-#     }
-# },
-{
-    "doctype": "Print Format",
-    "filters": {
-        "name": "Leave Encashment Request"
+    {
+        "doctype":"Workflow",
+        "filters": {
+            "name": "Leave Encashment Workflow"
+        }
     },
-    
-},
-{"doctype": "DocPerm"}
+    {
+        "doctype": "Workflow State",
+        "filters": {
+            "name": ["in", ["Draft", "Pending Approval", "Paid"]]
+        }
+    },
+    {
+        "doctype": "Print Format",
+        "filters": {
+            "name": "Leave Encashment Request"
+        }
+    }
 ]
 
